@@ -15,6 +15,14 @@
 
 #include <sys/syslimits.h>
 
+typedef struct		s_btree
+{
+	void			*data;
+	struct s_btree	*parent;
+	struct s_btree	*left;
+	struct s_btree	*right;
+}					t_btree;
+
 typedef struct		s_history
 {
 	char			**h_ptr;

@@ -12,7 +12,7 @@
 
 #include "../../inc/21sh.h"
 
-#define HANDLED_KEYS 9
+#define HANDLED_KEYS 10
 
 void (*g_key_handler[])(t_term *te) = {
 	&key_esc,
@@ -24,6 +24,7 @@ void (*g_key_handler[])(t_term *te) = {
 	&key_space,
 	&key_backspace,
 	&key_delete,
+	&ctrl_d
 };
 
 void			ft_bufferize(t_term *te, long input)
@@ -58,7 +59,7 @@ void			wait_input(t_term *te)
 	keys[6] = KEY_SPACE;
 	keys[7] = KEY_BACK;
 	keys[8] = KEY_DEL;
-//	keys[9] = PG_UP;
+	keys[9] = CTRL_D;
 //	keys[10] = PG_DOWN;
 	input = 0;
 	read(0, &input, 8);

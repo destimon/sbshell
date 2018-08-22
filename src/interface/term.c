@@ -20,8 +20,8 @@ int					complete(int a)
 void				reset_input_mode(void)
 {
 	tcsetattr(STDERR_FILENO, TCSANOW, &g_sa);
-	tputs(tgetstr("ve", NULL), 1, &complete);
-	tputs(tgetstr("te", NULL), 1, &complete);
+//	tputs(tgetstr("ve", NULL), 1, &complete);
+//	tputs(tgetstr("te", NULL), 1, &complete);
 }
 
 void				set_input_mode()

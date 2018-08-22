@@ -65,6 +65,7 @@
 # define KEY_DEL	2117294875
 # define PG_UP		2117425947
 # define PG_DOWN	2117491483
+# define CTRL_D		4
 
 /*
 ** GLOBAL VARIABLES.
@@ -103,6 +104,10 @@ void		wait_input(t_term *te);
 ** EXECUTE.
 */
 void		commands_space(t_term *te, char *input);
+/*
+** BTREE.
+*/
+t_btree		*catch_pipes(char *cmd);
 
 /*
 ** DIR: INPUT -----------------------------------------------------------------
@@ -122,6 +127,11 @@ void		key_left(t_term *te);
 void		key_right(t_term *te);
 void		key_up(t_term *te);
 void		key_down(t_term *te);
+/*
+** COMBINATIONS.
+*/
+void		ctrl_d(t_term *te);
+
 /*
 ** QU_DELETER.
 */

@@ -33,8 +33,8 @@ SRC 			= main.c $(ETC_DIR)environ.c $(INTERFACE_DIR)term.c $(INTERFACE_DIR)ui.c 
                 $(ETC_DIR)utils.c $(ETC_DIR)signals.c $(CORE_DIR)core.c $(CMD_DIR)cmd.c $(CMD_DIR)cmd_cd.c \
                 $(INPUT_DIR)input.c $(INPUT_DIR)input2.c $(CORE_DIR)execute.c $(ETC_DIR)utils2.c \
                 $(ETC_DIR)error.c $(CMD_DIR)cmd_env.c $(ETC_DIR)envmanage.c $(ETC_DIR)history.c \
-                $(INPUT_DIR)qu_deleter.c $(ETC_DIR)quotes.c
-
+                $(INPUT_DIR)qu_deleter.c $(ETC_DIR)quotes.c $(INPUT_DIR)combinations.c \
+                $(CORE_DIR)btree.c
 OBJ 			= $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 LIB_BIN 		= $(LIBFT_DIR)libft.a

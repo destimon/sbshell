@@ -62,7 +62,7 @@ void				push_history(t_history *hst, char *cont)
 	else if (hst->h_capacity > hst->h_size)
 	{
 		hst->h_ptr[hst->h_size] = ft_strdup(cont);
-		hst->h_iterator++;
+		hst->h_iterator = hst->h_size + 1;
 		hst->h_size++;
 		hst->h_ptr[hst->h_size] = NULL;
 	}

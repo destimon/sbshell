@@ -38,6 +38,8 @@ void			key_up(t_term *te)
 		ft_bzero(te->query, ARG_MAX);
 		te->hst->h_iterator--;
 		ft_strcpy(te->query, te->hst->h_ptr[te->hst->h_iterator]);
+		te->q_iterator = (int)ft_strlen(te->hst->h_ptr[te->hst->h_iterator]);
+		te->q_end = (int)ft_strlen(te->hst->h_ptr[te->hst->h_iterator]);
 		ft_outputchars(te->hst->h_ptr[te->hst->h_iterator]);
 	}
 }
@@ -50,6 +52,8 @@ void			key_down(t_term *te)
 		ft_bzero(te->query, ARG_MAX);
 		te->hst->h_iterator++;
 		ft_strcpy(te->query, te->hst->h_ptr[te->hst->h_iterator]);
+		te->q_iterator = (int)ft_strlen(te->hst->h_ptr[te->hst->h_iterator]);
+		te->q_end = (int)ft_strlen(te->hst->h_ptr[te->hst->h_iterator]);
 		ft_outputchars(te->hst->h_ptr[te->hst->h_iterator]);
 	}
 }

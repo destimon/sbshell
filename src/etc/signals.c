@@ -21,29 +21,22 @@ static void		restore(int sig)
 	i = -1;
 	if (sig == SIGINT)
 	{
-		g_te = init_term();
+//		g_te = init_term();
 		if (g_curr_job <= 0)
 		{
 			ft_putchar('\n');
 			show_prompt(g_te);
 		}
-		while (g_te->env[++i])
-			free(g_te->env[i]);
-		free(g_te->env);
-		free(g_te);
-	}
-	else if (sig == SIGTSTP)
-	{
-		tputs(tgetstr("cl", NULL), 1, &complete);
-		tputs(tgetstr("ve", NULL), 1, &complete);
-		ioctl(STDERR_FILENO, TIOCSTI, "\x1A");
-		reset_input_mode();
-		signal(SIGTSTP, SIG_DFL);
-	}
-	else
-	{
-		reset_input_mode();
-		exit(0);
+		ft_bzero(g_te->query, ARG_MAX);
+		g_te->q_iterator = 0;
+		g_te->q_end = 0;
+//		while (g_te->env[++i])
+//			free(g_te->env[i]);
+//		free(g_te->env);
+//		ft_free_twodm(g_te->hst->h_ptr);
+//		free(g_te->hst);
+//		ft_bzero(g_te->query, ARG_MAX);
+//		free(g_te);
 	}
 }
 

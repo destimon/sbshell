@@ -55,7 +55,7 @@ static void		replacement(t_term *te, char **string)
 			string[i] = tilde_handler(te, string[i]);
 			free(var);
 		}
-		else if (string[i][0] == '$' && string[i][1])
+		if (string[i][0] == '$' && string[i][1])
 		{
 			var = var_namecut(&string[i][1]);
 			free(string[i]);
@@ -67,6 +67,7 @@ static void		replacement(t_term *te, char **string)
 			var = string[i];
 			string[i] = remove_occ(string[i], '"');
 			free(var);
+			replacement(te, &string[i]);
 		}
 		else if (string[i][0] == '\'')
 		{
@@ -81,24 +82,17 @@ static void		replacement(t_term *te, char **string)
 void			commands_space(t_term *te, char *input)
 {
 	char	**query;
-	int		i;
 
 	if (!input)
 		return ;
+	catch_pipes(input);
 	query = ft_strsplit_two(input, ' ', '\t');
 	free(input);
 	if (!ft_elems(query))
-	{
-		free(query);
-		return ;
-	}
+		return (free(query));
 	replacement(te, query);
+	reset_input_mode();
 	commands_switch(te, query);
-	i = 0;
-	while (query[i])
-	{
-		ft_strdel(&query[i]);
-		i++;
-	}
-	free(query);
+	set_input_mode();
+	ft_two_del(query);
 }
