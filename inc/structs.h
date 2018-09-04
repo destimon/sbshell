@@ -15,13 +15,13 @@
 
 #include <sys/syslimits.h>
 
-typedef struct		s_btree
+typedef struct		s_token
 {
-	void			*data;
-	struct s_btree	*parent;
-	struct s_btree	*left;
-	struct s_btree	*right;
-}					t_btree;
+	int				op;
+	char			*left;
+	char			*right;
+	struct s_token	*next;
+}					t_token;
 
 typedef struct		s_history
 {

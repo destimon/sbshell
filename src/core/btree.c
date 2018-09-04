@@ -1,62 +1,60 @@
 #include "../../inc/21sh.h"
 
-static t_btree	*alloc_btree(void *value)
+static t_token	*alloc_token(char *left, char *right, int op)
 {
-	t_btree		*btree;
+	t_token		*tok;
 
-	btree = (t_btree*)malloc(sizeof(t_btree));
-	if (btree)
+	tok = (t_token*)malloc(sizeof(t_token));
+	if (tok)
 	{
-		btree->data = value;
-		btree->parent = NULL;
-		btree->left = NULL;
-		btree->right = NULL;
-		return (btree);
+		tok->left = left;
+		tok->right = right;
+		tok->op = op;
+		tok->next = NULL;
+		return (tok);
 	}
 	return (NULL);
 }
 
-static t_btree	*get_root(char **pipes)
+static t_token	*get_token(char **pipes)
 {
-	t_btree		*btree;
+	t_token		*start;
+	t_token		*tmp;
+	int			i;
+	int			size;
 
-	btree = alloc_btree((void*)'|');
-	if (btree && pipes && pipes[0] && pipes[1])
+	i = 0;
+	start = alloc_token(pipes[i], pipes[i + 1], B_PIPE);
+	tmp = start;
+	size = ft_elems(pipes);
+	i += 1;
+	while (i < size - 1)
 	{
-		btree->left = alloc_btree((void*)pipes[0]);
-		btree->right = alloc_btree((void*)pipes[1]);
-		return (btree);
+		tmp->next = alloc_token(pipes[i], pipes[i + 1], B_PIPE);
+		tmp = tmp->next;
+		i++;
 	}
-	return (NULL);
+	return (start);
 }
 
-t_btree			*catch_pipes(char *cmd)
+int				catch_pipes(char *cmd)
 {
 	char		**pipes;
-	t_btree		*root;
-	t_btree		*top;
-	t_btree		*tmp;
-	int			i;
+	t_token		*tok;
 
-	i = 2;
 	pipes = ft_strsplit(cmd, '|');
-	root = get_root(pipes);
-	if (root)
+	if (ft_elems(pipes) < 2)
 	{
-		tmp = root;
-		while (pipes[i])
-		{
-			top = alloc_btree((void*)'|');
-			if (top)
-			{
-				top->right = alloc_btree(pipes[i]);
-				top->left = tmp;
-//				printf("top->right->data: %s\n", (char*)top->right->data);
-//				printf("top->left->data: %s\n", (char*)top->left->right->data);
-				tmp = top;
-			}
-			i++;
-		}
-		return (tmp);
+		ft_free_twodm(pipes);
+		return (0);
 	}
+	tok = get_token(pipes);
+	while (tok)
+	{
+		printf("left: %s\n", tok->left);
+		printf("right: %s\n", tok->right);
+		tok = tok->next;
+	}
+	ft_free_twodm(pipes);
+	return (1);
 }

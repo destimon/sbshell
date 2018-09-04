@@ -65,9 +65,10 @@ void			key_backspace(t_term *te)
 		tputs(tgetstr("le", NULL), 1, &complete);
 		tputs(tgetstr("dc", NULL), 1, &complete);
 	}
-	else if (te->q_iterator == 0)
+	else if (te->q_iterator == 1)
 	{
-		te->query[te->q_iterator] = '\0';
+		ft_memmove(&te->query[0], &te->query[1],
+				   (size_t)te->q_end - te->q_iterator);
 	}
 }
 

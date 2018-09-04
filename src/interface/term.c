@@ -20,8 +20,6 @@ int					complete(int a)
 void				reset_input_mode(void)
 {
 	tcsetattr(STDERR_FILENO, TCSANOW, &g_sa);
-//	tputs(tgetstr("ve", NULL), 1, &complete);
-//	tputs(tgetstr("te", NULL), 1, &complete);
 }
 
 void				set_input_mode()
@@ -47,6 +45,19 @@ void				set_input_mode()
 	tcsetattr(STDERR_FILENO, TCSANOW, &tattr);
 }
 
+static void			sh_lvl(t_term **te)
+{
+	char			*shvar;
+	int				lvl;
+
+	shvar = get_var(*te, "SHLVL");
+	lvl = ft_atoi(shvar) + 1;
+	free(shvar);
+	shvar = ft_itoa(lvl);
+	set_var(*te, "SHLVL=", shvar);
+	free(shvar);
+}
+
 t_term				*init_term(void)
 {
 	struct winsize	ws;
@@ -57,6 +68,7 @@ t_term				*init_term(void)
 		return (NULL);
 	ioctl(0, TIOCGWINSZ, &ws);
 	te->env = get_env();
+	sh_lvl(&te);
 	te->am_quotes = 0;
 	te->am_dquotes = 0;
 	te->q_iterator = 0;

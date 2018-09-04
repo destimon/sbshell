@@ -35,6 +35,18 @@
 //◦ tgoto
 //◦ tputs
 
+void			print_borroff()
+{
+	ft_putendl("\t         (__) \n"
+				   "\t         (oo) ШО?\n"
+				   "\t   /------\\/ \n"
+				   "\t  / |    ||   \n"
+				   "\t *  /\\---/\\ \n"
+				   "\t    ~~   ~~   \n"
+					   "\tboroff shell alpha\n"
+					   "\t(c) dcherend");
+}
+
 void			init_loop()
 {
 	t_term		*te;
@@ -51,6 +63,7 @@ void			init_loop()
 
 int				main(void)
 {
+	print_borroff();
 	init_loop();
 	return 0;
 }

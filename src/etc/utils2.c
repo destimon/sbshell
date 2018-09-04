@@ -61,3 +61,27 @@ char			*var_namecut(const char *var)
 	}
 	return (NULL);
 }
+
+void		cursor_left(int times)
+{
+	int		i;
+
+	i = 0;
+	while (i < times)
+	{
+		tputs(tgetstr("le", NULL), 1, &complete);
+		i++;
+	}
+}
+
+void		cursor_right(int times)
+{
+	int		i;
+
+	i = 0;
+	while (i < times)
+	{
+		tputs(tgetstr("nd", NULL), 1, &complete);
+		i++;
+	}
+}

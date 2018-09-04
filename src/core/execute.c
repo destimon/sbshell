@@ -82,17 +82,31 @@ static void		replacement(t_term *te, char **string)
 void			commands_space(t_term *te, char *input)
 {
 	char	**query;
+	char	**pipes;
+	int		i;
 
+	i = 0;
 	if (!input)
 		return ;
-	catch_pipes(input);
-	query = ft_strsplit_two(input, ' ', '\t');
-	free(input);
-	if (!ft_elems(query))
-		return (free(query));
-	replacement(te, query);
-	reset_input_mode();
-	commands_switch(te, query);
-	set_input_mode();
-	ft_two_del(query);
+	if (catch_pipes(input) == 0)
+	{
+		pipes = ft_strsplit(input, '|');
+		free(input);
+		while (pipes[i])
+		{
+			query = ft_strsplit_two(pipes[i], ' ', '\t');
+			if (!ft_elems(query))
+				return (free(query));
+			replacement(te, query);
+			reset_input_mode();
+			commands_switch(te, query);
+			set_input_mode();
+			if (query)
+				ft_two_del(query);
+			i++;
+		}
+		ft_free_twodm(pipes);
+	}
+	else
+		free(input);
 }

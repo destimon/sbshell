@@ -29,6 +29,14 @@
 #include <stdbool.h>
 #include "structs.h"
 
+/*
+** pipe, redirect, double redirect and heredoc.
+*/
+# define B_EMPT				0
+# define B_PIPE				1
+# define B_REDI				2
+# define B_DRED				3
+# define B_HERE				4
 
 /*
 ** COLORS.
@@ -66,6 +74,13 @@
 # define PG_UP		2117425947
 # define PG_DOWN	2117491483
 # define CTRL_D		4
+# define CTRL_E		5
+# define CTRL_A		1
+# define ALT_RIGHT	1130044187
+# define ALT_LEFT	1146821403
+# define CMD_V		2333758649037711114
+# define BACKSPACE	127
+# define KEY_ENTER	10
 
 /*
 ** GLOBAL VARIABLES.
@@ -107,7 +122,7 @@ void		commands_space(t_term *te, char *input);
 /*
 ** BTREE.
 */
-t_btree		*catch_pipes(char *cmd);
+int			catch_pipes(char *cmd);
 
 /*
 ** DIR: INPUT -----------------------------------------------------------------
@@ -137,6 +152,13 @@ void		ctrl_d(t_term *te);
 */
 void		ft_deletechars(int size);
 void		ft_outputchars(char *str);
+/*
+** MOVING.
+*/
+void		key_ctrlleft(t_term *te);
+void		key_ctrlright(t_term *te);
+void		key_ctrle(t_term *te);
+void		key_ctrla(t_term *te);
 
 /*
 ** DIR: ETC -------------------------------------------------------------------
@@ -169,6 +191,8 @@ int			search_env(t_term *te, int *i);
 void		help_out(void);
 char		*var_namecut(const char *var);
 char		*tilde_handler(t_term *te, const char *string);
+void		cursor_left(int times);
+void		cursor_right(int times);
 /*
 ** ERROR.
 */

@@ -16,12 +16,8 @@ t_term *g_te;
 
 static void		restore(int sig)
 {
-	int			i;
-
-	i = -1;
 	if (sig == SIGINT)
 	{
-//		g_te = init_term();
 		if (g_curr_job <= 0)
 		{
 			ft_putchar('\n');
@@ -30,13 +26,6 @@ static void		restore(int sig)
 		ft_bzero(g_te->query, ARG_MAX);
 		g_te->q_iterator = 0;
 		g_te->q_end = 0;
-//		while (g_te->env[++i])
-//			free(g_te->env[i]);
-//		free(g_te->env);
-//		ft_free_twodm(g_te->hst->h_ptr);
-//		free(g_te->hst);
-//		ft_bzero(g_te->query, ARG_MAX);
-//		free(g_te);
 	}
 }
 
